@@ -1,10 +1,15 @@
-'use strict';
+// 'use strict';
 
 var gulp = require('gulp');
 var babel = require('gulp-babel');
 var browserify = require('gulp-browserify');
 var browserSync = require('browser-sync');
 var plumber = require('gulp-plumber');
+
+var sass = require('gulp-sass');
+    autoprefixer = require('gulp-autoprefixer');
+    minifyCSS = require('gulp-minify-css');
+    rename = require('gulp-rename');
 
 
 gulp.task('compile-react', function() {
@@ -17,8 +22,19 @@ gulp.task('compile-react', function() {
 			insertGlobals: true,
 			debug: true
 		}))
-		.pipe(gulp.dest('./'));
+		.pipe(gulp.dest('./build'));
 });
+
+gulp.task('sass', function(){
+  gulp.src('./scss/styles.scss')
+  .pipe(sass())
+   .pipe(autoprefixer({
+     browsers: ['last 2 versions']
+   }))
+  .pipe(minifyCSS())
+  .pipe(rename('style.min.css'))
+  .pipe(gulp.dest('./build/css'));
+  });
 
 gulp.task('browser-sync', ['compile-react'], function() {
 
@@ -26,8 +42,10 @@ gulp.task('browser-sync', ['compile-react'], function() {
 		server: './'
 	});
 
+
+  gulp.watch(['./scss/*.scss'], ['sass']);
 	gulp.watch(['main.jsx'], ['compile-react']);
-	gulp.watch(['main.js', 'index.html']).on('change', browserSync.reload);
+	gulp.watch(['main.js', 'index.html', './build/css/style.min.css']).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['browser-sync']);
+gulp.task('default', ['browser-sync', 'sass']);
