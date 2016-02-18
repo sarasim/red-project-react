@@ -22,7 +22,7 @@ gulp.task('compile-react', function() {
 			insertGlobals: true,
 			debug: true
 		}))
-		.pipe(gulp.dest('./build'));
+		.pipe(gulp.dest('./'));
 });
 
 gulp.task('sass', function(){

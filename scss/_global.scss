@@ -1,1 +1,108 @@
+* {
+  box-sizing: border-box;
+}
 
+.container {
+  padding: 0 2rem;
+  margin: 0;
+  width: 100%;
+}
+
+html, body {
+  font-family: 'Open-Sans';
+  font-size: 16px;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  position:relative;
+  width: 100vw;
+}
+
+#mount-node {
+  flex: 1 0 80%;
+  background: #fd746c;
+  background: linear-gradient(to right, #fd746c, #ff9068);
+}
+
+.main {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+button {
+  background: #edf1f2;
+  border: 2px solid white;
+  border-radius: 2px;
+  color: #222;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+  outline: none;
+  padding: 1rem 4rem;
+  text-align: center;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+header {
+  align-items: center;
+  display:flex;
+  flex: 0 1 20%;
+  justify-content: center;
+  max-width: 150px;
+  min-width: 150px;
+  position: relative;
+
+
+h1 {
+  color: #edf1f2;
+  display: block;
+  font-size: 100px;
+  font-weight: bold;
+  letter-spacing: -10px;
+  margin: 0;
+  text-transform: uppercase;
+  top: 100px;
+  transform: rotate(-90deg);
+  z-index: -1;
+}
+
+
+
+.rocket {
+  align-items: center;
+  background-color: #fd746c;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  font-size: 4rem;
+  height: 100px;
+  justify-content: center;
+  margin: 0;
+  position: relative;
+  transform: rotate(-90deg);
+  width: 100px;
+}
+
+}
+
+.timer {
+  align-self: flex-start;
+  background-color: black;
+  color: green;
+  font-size: 1.5rem;
+  text-align: center;
+  width:70px;
+}
+
+footer {
+  flex: 0 1 20%;
+  position: relative;
+}
