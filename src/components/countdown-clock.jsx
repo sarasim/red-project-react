@@ -6,19 +6,29 @@ var Countdown = React.createClass({
 
   getInitialState: function() {
     return {
-          timer: 'timer-hidden',
+          minutedElapsed: 1,
+          start: false,
           secondsElapsed: 60
       };
   },
 
+  tick: function(){
+      this.setState({secondsElapsed: this.state.secondsElapsed - 1});
+      if (this.state.secondsElapsed <=0){
+      clearInterval(this.interval);
+      }
+    },
+
+   componentDidMount: function(){
+      this.interval = setInterval(this.tick, 1000);
+   },
+
   render: function(){
     return  (
-      <div className="mars-quiz">
-        <div className={this.startTimer}>
-          <button className="takeTest" onClick={this.startTimer}>Take Test</button>
+
+        <div className="timer">
           <p>{ this.state.secondsElapsed }</p>
         </div>
-      </div>
 
     );
   }

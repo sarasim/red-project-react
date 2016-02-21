@@ -45,10 +45,14 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	__webpack_require__(221);
+	__webpack_require__(225);
+	__webpack_require__(224);
+	__webpack_require__(222);
 	__webpack_require__(220);
-	__webpack_require__(219);
-	module.exports = __webpack_require__(222);
+	__webpack_require__(221);
+	__webpack_require__(226);
+	__webpack_require__(223);
+	module.exports = __webpack_require__(219);
 
 
 /***/ },
@@ -67,25 +71,35 @@
 
 	var _reactRouter = __webpack_require__(160);
 
-	var _questionScreen = __webpack_require__(219);
-
-	var _questionScreen2 = _interopRequireDefault(_questionScreen);
-
-	var _countdownClock = __webpack_require__(220);
-
-	var _countdownClock2 = _interopRequireDefault(_countdownClock);
-
-	var _ = __webpack_require__(221);
-
-	var _2 = _interopRequireDefault(_);
-
-	var _welcomeScreen = __webpack_require__(222);
+	var _welcomeScreen = __webpack_require__(219);
 
 	var _welcomeScreen2 = _interopRequireDefault(_welcomeScreen);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _evaluation = __webpack_require__(220);
 
-	//components
+	var _evaluation2 = _interopRequireDefault(_evaluation);
+
+	var _questionScreen = __webpack_require__(221);
+
+	var _questionScreen2 = _interopRequireDefault(_questionScreen);
+
+	var _countdownClock = __webpack_require__(222);
+
+	var _countdownClock2 = _interopRequireDefault(_countdownClock);
+
+	var _rejected = __webpack_require__(223);
+
+	var _rejected2 = _interopRequireDefault(_rejected);
+
+	var _accepted = __webpack_require__(224);
+
+	var _accepted2 = _interopRequireDefault(_accepted);
+
+	var _ = __webpack_require__(225);
+
+	var _2 = _interopRequireDefault(_);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Mars = _react2.default.createClass({
 	  displayName: 'Mars',
@@ -97,13 +111,18 @@
 	      { history: _reactRouter.browserHistory },
 	      _react2.default.createElement(_reactRouter.Redirect, { from: '/', to: '/welcome-screen' }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/welcome-screen', component: _welcomeScreen2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/evaluation', component: _evaluation2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/question-screen', component: _questionScreen2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/rejected', component: _rejected2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/accepted', component: _accepted2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '*', component: _2.default })
 	    );
 	  }
 	});
 
-	_reactDom2.default.render(_react2.default.createElement(Mars, null), document.querySelector('#mars-quiz'));
+	//components
+
+	_reactDom2.default.render(_react2.default.createElement(Mars, null), document.querySelector('#mount-node'));
 
 	//browser not making a request to get a page,
 	//js is modifying the browser so that the user gets visual feedback but not actually got o another page
@@ -24863,44 +24882,38 @@
 /* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(160);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Question = _react2.default.createClass({
-	  displayName: "Question",
-	  getInitialState: function getInitialState() {
-	    return {
-	      start: false
-	    };
-	  },
+	var Welcome = _react2.default.createClass({
+	  displayName: 'Welcome',
 
 
-	  startQuiz: function startQuiz() {
-	    this.setState({ start: true });
+	  takeTest: function takeTest() {
+	    _reactRouter.browserHistory.push('/evaluation');
 	  },
 
 	  render: function render() {
 	    return _react2.default.createElement(
-	      "div",
-	      { className: "main-panel" },
+	      'div',
+	      { className: 'main-panel' },
 	      _react2.default.createElement(
-	        "button",
-	        { className: "beginTest", onClick: this.startQuiz },
-	        "Begin Evaluation"
+	        'button',
+	        { className: 'takeTest', onClick: this.takeTest },
+	        'Take Test'
 	      )
 	    );
 	  }
 	});
 
-	//end
-	// 'use strict';
-
-	module.exports = Question;
+	module.exports = Welcome;
 
 /***/ },
 /* 220 */
@@ -24912,36 +24925,159 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(160);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Countdown = _react2.default.createClass({
-	  displayName: 'Countdown',
+	var Evaluation = _react2.default.createClass({
+	  displayName: 'Evaluation',
 
 
-	  getInitialState: function getInitialState() {
-	    return {
-	      timer: 'timer-hidden',
-	      secondsElapsed: 60
-	    };
+	  startQuiz: function startQuiz() {
+	    _reactRouter.browserHistory.push('/question-screen');
 	  },
 
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'mars-quiz' },
+	      { className: 'main-panel' },
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'beginTest', onClick: this.startQuiz },
+	        'Begin Evaluation'
+	      )
+	    );
+	  }
+
+	});
+
+	module.exports = Evaluation;
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(160);
+
+	var _countdownClock = __webpack_require__(222);
+
+	var _countdownClock2 = _interopRequireDefault(_countdownClock);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Question = _react2.default.createClass({
+	  displayName: 'Question',
+	  getInitialState: function getInitialState() {
+	    return {
+	      questions: [['1'], ['2'], ['3']]
+
+	      //array and use .push to get to each question
+
+	    };
+	  },
+
+
+	  quizAnswer: function quizAnswer(event) {
+	    event.preventDefault();
+
+	    if (this.ref.input !== '') {
+	      this.state.questions.push(this.state.questions[1]);
+	      this.ref.quizAnswer.reset();
+	    }
+	  },
+
+	  //remember to return when using map()
+
+	  // if(this.refs.quizAnswer === 'Mars'){
+	  //   browserHistory.push('/accepted')
+	  // if quizAnswer === 'Mars' ? true : false
+
+	  // renderQuestions: function(question, index){}?
+
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'main-panel' },
 	      _react2.default.createElement(
 	        'div',
-	        { className: this.startTimer },
+	        { className: 'timer' },
+	        this.state.onClick ? _react2.default.createElement(_countdownClock2.default, null) : null
+	      ),
+	      _react2.default.createElement(_countdownClock2.default, null),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'quiz' },
 	        _react2.default.createElement(
-	          'button',
-	          { className: 'takeTest', onClick: this.startTimer },
-	          'Take Test'
+	          'span',
+	          null,
+	          'What is the fourth planet from the sun?'
 	        ),
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          this.state.secondsElapsed
+	          'form',
+	          { className: 'quizForm' },
+	          _react2.default.createElement('input', { type: 'text', ref: 'quizAnswer' }),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit', onSubmit: this.quizAnswer },
+	            'Submit Answer'
+	          )
 	        )
+	      )
+	    );
+	  }
+	}); // 'use strict';
+
+	module.exports = Question;
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Countdown = _react2.default.createClass({
+	  displayName: "Countdown",
+
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      minutedElapsed: 1,
+	      start: false,
+	      secondsElapsed: 60
+	    };
+	  },
+
+	  tick: function tick() {
+	    this.setState({ secondsElapsed: this.state.secondsElapsed - 1 });
+	    if (this.state.secondsElapsed <= 0) {
+	      clearInterval(this.interval);
+	    }
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    this.interval = setInterval(this.tick, 1000);
+	  },
+
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "timer" },
+	      _react2.default.createElement(
+	        "p",
+	        null,
+	        this.state.secondsElapsed
 	      )
 	    );
 	  }
@@ -24954,7 +25090,71 @@
 	module.exports = Countdown;
 
 /***/ },
-/* 221 */
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Rejected = _react2.default.createClass({
+	  displayName: "Rejected",
+
+
+	  render: function render() {
+
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "rejected-panel" },
+	      _react2.default.createElement(
+	        "h1",
+	        { className: "rejected" },
+	        "Rejected!"
+	      )
+	    );
+	  }
+
+	});
+
+	module.exports = Rejected;
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(160);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Accepted = _react2.default.createClass({
+	  displayName: "Accepted",
+
+
+	  render: function render() {
+
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "accepted-panel" },
+	      _react2.default.createElement("h1", { className: "accepted", tagline: "Accepted!" })
+	    );
+	  }
+
+	});
+
+	module.exports = Accepted;
+
+/***/ },
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24981,38 +25181,15 @@
 	module.exports = NotFound;
 
 /***/ },
-/* 222 */
-/***/ function(module, exports, __webpack_require__) {
+/* 226 */
+/***/ function(module, exports) {
 
-	'use strict';
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Welcome = _react2.default.createClass({
-	  displayName: 'Welcome',
-	  takeTest: function takeTest() {
-	    this.props.history.push('./question-screen');
-	  },
-
-
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'main-panel' },
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'takeTest', onClick: this.takeTest },
-	        'Take Test'
-	      )
-	    );
-	  }
-	});
-
-	module.exports = Welcome;
+	// Questions :[
+	// ['What is the 4th planet from the sun?'],
+	// ['Where does the movie the Martian take place?'],
+	// ['Where does NASA\'s Exploration Rover Mission taking place?']
+	// ]
+	"use strict";
 
 /***/ }
 /******/ ]);
