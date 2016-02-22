@@ -3,14 +3,14 @@ import {browserHistory} from "react-router";
 
 var Evaluation = React.createClass({
 
-  startQuiz: function(){
+  _handlestartQuiz: function(){
      browserHistory.push('/question-screen');
   },
 
   render : function(){
     return (
       <div className="main-panel">
-        <button className="beginTest" onClick={this.startQuiz}>Begin Evaluation</button>
+        <button className="beginTest" onClick={this._handlestartQuiz}>Begin Evaluation</button>
       </div>
       )
    }

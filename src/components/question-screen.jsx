@@ -4,16 +4,14 @@ import React from 'react';
 import {browserHistory} from "react-router";
 
 import Countdown from './countdown-clock.jsx';
+import Questions from './questions.jsx';
 
 
-var Question = React.createClass({
+var Questionscreen = React.createClass({
 
   getInitialState(){
     return {
-      questions: [
-
-        //array and use .push to get to each question
-      ]
+      questions: {},
 
     }
 
@@ -22,38 +20,23 @@ var Question = React.createClass({
   quizAnswer: function(event){
     event.preventDefault();
 
-    // if(this.ref.input !== ''){
-    //   this.state.questions.push(this.state.questions[1])
-
-      this.refs.quizAnswer.reset();
+      this.ref.quizAnswer.reset();
 
 
    },
 
 
-    //remember to return when using map()
-
-
-// if(this.refs.quizAnswer === 'Mars'){
-//   browserHistory.push('/accepted')
-// if quizAnswer === 'Mars' ? true : false
-
-
-  // renderQuestions: function(question, index){}?
-
-
-
-
   render: function(){
     return (
         <div className="main-panel">
-            <div className="timer">{this.state.onClick ? <Countdown /> : null}</div>
-              <Countdown />
+            <div className="timer"></div>
+              <Countdown startMinutes={1}
+                 />
             <div className="quiz">
-              <span>What is the fourth planet from the sun?</span>
+              <span>What is the fourth planet from the Sun?</span>
               <form className="quizForm">
                 <input type="text" ref="quizAnswer" />
-                <button type="submit" onSubmit={this.quizAnswer}>Submit Answer</button>
+                <button type="submit" onSubmit={this.renderQuestions}>Submit Answer</button>
               </form>
             </div>
       </div>
@@ -61,4 +44,85 @@ var Question = React.createClass({
   }
 });
 
-module.exports = Question;
+
+module.exports = Questionscreen;
+
+//--------------------------------------------------------Johnny's code
+//
+// var Questions = React.createClass({
+//
+// getInitialState: function(){
+//   return {
+//     correctCount: 0,
+//     questionIndex: 0
+//   }
+// },
+//
+// componentWillUpdate: function(nextProps, nextState) {
+//   if (nextState.questionIndex === nextProps.questions.length + 1) {
+//     correctCount === 2
+//     ? this.props. onCorrect())
+//     : this.props. onFailure());
+//   }
+// },
+
+//on Question screen:
+//onCorrect={this._handleCorrect}
+//_handleCorrect(){
+// browserHistory.push('/accepted');
+// }
+//onFailer={this._handleFailure}
+// browserHistory.push('/rejected');
+ // }
+
+//
+// render(){
+//   return(
+//     <div className='main-panel'>
+//       <Question currentQuestion={this.props.questions[this.state.questionIndex]}
+//         onAnswer={this._handleUserAnswer} />
+//     </div>
+//
+//   )
+// },
+//
+// _handleUserAnswer(userAnswer){
+//   var correctAnswer = this.props.question[this.state.questionIndex].answer;
+//
+//   var currentCorrectCount = this.state.correctCount;
+//
+//   if (correctAnswer === userAnswer) {
+//     currentCorrectCount = this.state.correctCount + 1;
+// }
+//   this.setState({
+//     correctCount: currentCorrectCount,
+//     questionIndex: this.state.questionIndex + 1
+//   });
+//
+// });
+
+// Question.propType = {
+//   question: ReactPropTypes.arrayOf(
+//     React.PropTypes.shapeOf({
+//       question: React.PropTypes.string.isRequired,
+//       answer:React.PropTypes.string.isRequired
+//     }).isRequired
+//   ).isRequired
+// }
+
+
+// {this.state.questions.map(this.renderQuestions)}
+/*<Countdown
+onTimerFinished ={this._handleTimeRunout}
+startTime={60}
+startTimer={this.state.startTimer} />*/
+
+//Countdown.defaultProps = {
+//   InitialStartTime: 60
+// };
+
+// _handleTimeRunout(){
+//   browserHistory.push('./rejected');
+// }
+
+//PUBLIC FUNCTIONS AT THE TOP AND PRIVATE AT THE BOTTOM

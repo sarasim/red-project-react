@@ -4,15 +4,15 @@ import {browserHistory} from "react-router";
 var Welcome = React.createClass({
 
 
-  takeTest: function(){
+  _handletakeTest: function(){
    browserHistory.push('/evaluation');
 
  },
 
-  render: function(){
+  render(){
     return (
       <div className="main-panel">
-          <button className="takeTest" onClick={this.takeTest}>Take Test</button>
+          <button className="takeTest" onClick={this._handletakeTest}>Take Test</button>
       </div>
     );
   }

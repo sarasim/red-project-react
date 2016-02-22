@@ -45,13 +45,13 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
+	__webpack_require__(226);
 	__webpack_require__(225);
-	__webpack_require__(224);
 	__webpack_require__(222);
 	__webpack_require__(220);
 	__webpack_require__(221);
-	__webpack_require__(226);
 	__webpack_require__(223);
+	__webpack_require__(224);
 	module.exports = __webpack_require__(219);
 
 
@@ -87,15 +87,15 @@
 
 	var _countdownClock2 = _interopRequireDefault(_countdownClock);
 
-	var _rejected = __webpack_require__(223);
+	var _rejected = __webpack_require__(224);
 
 	var _rejected2 = _interopRequireDefault(_rejected);
 
-	var _accepted = __webpack_require__(224);
+	var _accepted = __webpack_require__(225);
 
 	var _accepted2 = _interopRequireDefault(_accepted);
 
-	var _ = __webpack_require__(225);
+	var _ = __webpack_require__(226);
 
 	var _2 = _interopRequireDefault(_);
 
@@ -24896,7 +24896,7 @@
 	  displayName: 'Welcome',
 
 
-	  takeTest: function takeTest() {
+	  _handletakeTest: function _handletakeTest() {
 	    _reactRouter.browserHistory.push('/evaluation');
 	  },
 
@@ -24906,7 +24906,7 @@
 	      { className: 'main-panel' },
 	      _react2.default.createElement(
 	        'button',
-	        { className: 'takeTest', onClick: this.takeTest },
+	        { className: 'takeTest', onClick: this._handletakeTest },
 	        'Take Test'
 	      )
 	    );
@@ -24933,7 +24933,7 @@
 	  displayName: 'Evaluation',
 
 
-	  startQuiz: function startQuiz() {
+	  _handlestartQuiz: function _handlestartQuiz() {
 	    _reactRouter.browserHistory.push('/question-screen');
 	  },
 
@@ -24943,7 +24943,7 @@
 	      { className: 'main-panel' },
 	      _react2.default.createElement(
 	        'button',
-	        { className: 'beginTest', onClick: this.startQuiz },
+	        { className: 'beginTest', onClick: this._handlestartQuiz },
 	        'Begin Evaluation'
 	      )
 	    );
@@ -24969,15 +24969,19 @@
 
 	var _countdownClock2 = _interopRequireDefault(_countdownClock);
 
+	var _questions = __webpack_require__(223);
+
+	var _questions2 = _interopRequireDefault(_questions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Question = _react2.default.createClass({
-	  displayName: 'Question',
+	// 'use strict';
+
+	var Questionscreen = _react2.default.createClass({
+	  displayName: 'Questionscreen',
 	  getInitialState: function getInitialState() {
 	    return {
-	      questions: [['1'], ['2'], ['3']]
-
-	      //array and use .push to get to each question
+	      questions: {}
 
 	    };
 	  },
@@ -24986,37 +24990,23 @@
 	  quizAnswer: function quizAnswer(event) {
 	    event.preventDefault();
 
-	    if (this.ref.input !== '') {
-	      this.state.questions.push(this.state.questions[1]);
-	      this.ref.quizAnswer.reset();
-	    }
+	    this.ref.quizAnswer.reset();
 	  },
-
-	  //remember to return when using map()
-
-	  // if(this.refs.quizAnswer === 'Mars'){
-	  //   browserHistory.push('/accepted')
-	  // if quizAnswer === 'Mars' ? true : false
-
-	  // renderQuestions: function(question, index){}?
 
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'main-panel' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'timer' },
-	        this.state.onClick ? _react2.default.createElement(_countdownClock2.default, null) : null
-	      ),
-	      _react2.default.createElement(_countdownClock2.default, null),
+	      _react2.default.createElement('div', { className: 'timer' }),
+	      _react2.default.createElement(_countdownClock2.default, { startMinutes: 1
+	      }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'quiz' },
 	        _react2.default.createElement(
 	          'span',
 	          null,
-	          'What is the fourth planet from the sun?'
+	          'What is the fourth planet from the Sun?'
 	        ),
 	        _react2.default.createElement(
 	          'form',
@@ -25024,16 +25014,95 @@
 	          _react2.default.createElement('input', { type: 'text', ref: 'quizAnswer' }),
 	          _react2.default.createElement(
 	            'button',
-	            { type: 'submit', onSubmit: this.quizAnswer },
+	            { type: 'submit', onSubmit: this.renderQuestions },
 	            'Submit Answer'
 	          )
 	        )
 	      )
 	    );
 	  }
-	}); // 'use strict';
+	});
 
-	module.exports = Question;
+	module.exports = Questionscreen;
+
+	//--------------------------------------------------------Johnny's code
+	//
+	// var Questions = React.createClass({
+	//
+	// getInitialState: function(){
+	//   return {
+	//     correctCount: 0,
+	//     questionIndex: 0
+	//   }
+	// },
+	//
+	// componentWillUpdate: function(nextProps, nextState) {
+	//   if (nextState.questionIndex === nextProps.questions.length + 1) {
+	//     correctCount === 2
+	//     ? this.props. onCorrect())
+	//     : this.props. onFailure());
+	//   }
+	// },
+
+	//on Question screen:
+	//onCorrect={this._handleCorrect}
+	//_handleCorrect(){
+	// browserHistory.push('/accepted');
+	// }
+	//onFailer={this._handleFailure}
+	// browserHistory.push('/rejected');
+	// }
+
+	//
+	// render(){
+	//   return(
+	//     <div className='main-panel'>
+	//       <Question currentQuestion={this.props.questions[this.state.questionIndex]}
+	//         onAnswer={this._handleUserAnswer} />
+	//     </div>
+	//
+	//   )
+	// },
+	//
+	// _handleUserAnswer(userAnswer){
+	//   var correctAnswer = this.props.question[this.state.questionIndex].answer;
+	//
+	//   var currentCorrectCount = this.state.correctCount;
+	//
+	//   if (correctAnswer === userAnswer) {
+	//     currentCorrectCount = this.state.correctCount + 1;
+	// }
+	//   this.setState({
+	//     correctCount: currentCorrectCount,
+	//     questionIndex: this.state.questionIndex + 1
+	//   });
+	//
+	// });
+
+	// Question.propType = {
+	//   question: ReactPropTypes.arrayOf(
+	//     React.PropTypes.shapeOf({
+	//       question: React.PropTypes.string.isRequired,
+	//       answer:React.PropTypes.string.isRequired
+	//     }).isRequired
+	//   ).isRequired
+	// }
+
+	// {this.state.questions.map(this.renderQuestions)}
+	/*<Countdown
+	onTimerFinished ={this._handleTimeRunout}
+	startTime={60}
+	startTimer={this.state.startTimer} />*/
+
+	//Countdown.defaultProps = {
+	//   InitialStartTime: 60
+	// };
+
+	// _handleTimeRunout(){
+	//   browserHistory.push('./rejected');
+	// }
+
+	//PUBLIC FUNCTIONS AT THE TOP AND PRIVATE AT THE BOTTOM
 
 /***/ },
 /* 222 */
@@ -25049,15 +25118,53 @@
 
 	var Countdown = _react2.default.createClass({
 	  displayName: "Countdown",
-
-
 	  getInitialState: function getInitialState() {
 	    return {
-	      minutedElapsed: 1,
-	      start: false,
+
 	      secondsElapsed: 60
 	    };
 	  },
+
+
+	  getSeconds: function getSeconds() {
+	    if (this.props.startMinutes >= 1) {
+	      return this.props.startMinutes * 60;
+	    } else {
+	      return 60;
+	    }
+	  },
+
+	  secondsLeft: function secondsLeft() {
+	    return Math.floor(this.state.secondsElapsed % 60);
+	  },
+
+	  minutesLeft: function minutesLeft() {
+	    return Math.floor(this.state.secondsElapsed / 60);
+	  },
+
+	  //_decrementCounter(){
+	  //this.setState({secondsElapsed: this.state.secondsElapsed - 1});
+	  //}
+
+	  //componentWillReceiveProps(nextProps){
+	  //if (nextProps.startTime){
+	  //     this._startTimer();
+	  //   }
+	  // }
+
+	  // componentDidUpdate(prevProps, prevState){
+	  //   if (this.state.secondsElapsed === 0) this.props.onTimeFinished();
+	  // }
+
+	  //componentWillUnmount(){
+	  // clearInterval(this.interval);
+	  //},
+
+	  //this prevents memory leaks
+
+	  // _startTimer(){
+	  //     this.interval = setInterval(this._decrementCounter, 1000);
+	  // }
 
 	  tick: function tick() {
 	    this.setState({ secondsElapsed: this.state.secondsElapsed - 1 });
@@ -25077,20 +25184,90 @@
 	      _react2.default.createElement(
 	        "p",
 	        null,
-	        this.state.secondsElapsed
+	        this.minutesLeft(),
+	        " : ",
+	        this.secondsLeft() < 10 ? "0" + this.secondsLeft() : this.secondsLeft()
 	      )
 	    );
 	  }
 
-	});
-
-	//or instead of <p>{this.renderMinutes()}:{this.renderSeconds()}</p>
-	// 'use strict';
+	}); // 'use strict';
 
 	module.exports = Countdown;
 
+	// Countdown.propTypes = {
+	//   startTime: PropTypes.number.isRequired,
+	//   startTimer: PropTypes.func.isRequired,
+	//   onTimeFinished: PropTypes.func.isRequired
+	// }
+
 /***/ },
 /* 223 */
+/***/ function(module, exports) {
+
+	// import React from 'react';
+	//
+	//
+	//  var Questions = React.createClass ({
+	//   getInitialState: function(){
+	//     return= {};
+	//   },
+	//   render: function(){
+	//
+	//   question[1] =
+	//     question: 'Question?',
+	//     answer: "Mars",
+	//   },
+	//   {
+	//   question[2] =
+	//     question: 'Question?',
+	//     answer: "Mars",
+	//   },
+	//   {
+	//   question[3] =
+	//     question: 'Question?',
+	//     answer: "Mars",
+	//   };
+	//
+	// },
+	//
+	// render(){
+	//   return(
+	//     <div>
+	//       <h1>{this.props.question.question}</h1>
+	//       <button onClick={() => this.props.onAnswer(true)}>True</button>
+	//       <button onClick={() => this.props.onAnswer(false)}>False</button>
+	//     </div>
+	//   )
+	// }
+	//
+	// Questions.propTypes = {
+	//   currentQuestion: React.PropTypes.shape({
+	//     question: React.PropTypes.string.isRequired,
+	//     answer: React.PropTypes.bool.isRequired
+	//   }).isRequired
+	//   onAnswer: React.PropTypes.func.isRequired
+	// }
+
+	//() => function() the arrow calss a function in a function= an anonymous
+
+	//shapeOf- declaring what it will look like
+	//
+	//   renderQuestions: function(question, index){
+	//     return <Questions key={index}
+	//                       id={index} />;
+	//
+	//     }
+	//   },
+	//
+	// });
+
+	//
+	// module.exports = Questions;
+	"use strict";
+
+/***/ },
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25123,7 +25300,7 @@
 	module.exports = Rejected;
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25154,7 +25331,7 @@
 	module.exports = Accepted;
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25179,17 +25356,6 @@
 	});
 
 	module.exports = NotFound;
-
-/***/ },
-/* 226 */
-/***/ function(module, exports) {
-
-	// Questions :[
-	// ['What is the 4th planet from the sun?'],
-	// ['Where does the movie the Martian take place?'],
-	// ['Where does NASA\'s Exploration Rover Mission taking place?']
-	// ]
-	"use strict";
 
 /***/ }
 /******/ ]);

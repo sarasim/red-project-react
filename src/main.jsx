@@ -8,7 +8,7 @@ import { Router, Route, browserHistory, Redirect } from 'react-router';
 
 import Welcome from './components/welcome-screen.jsx';
 import Evaluation from './components/evaluation.jsx';
-import Question from './components/question-screen.jsx';
+import Questionscreen from './components/question-screen.jsx';
 import Countdown from './components/countdown-clock.jsx';
 import Rejected from './components/rejected.jsx';
 import Accepted from './components/accepted.jsx';
@@ -23,7 +23,7 @@ var Mars = React.createClass({
         <Redirect from='/' to='/welcome-screen' />
         <Route path='/welcome-screen' component={Welcome} />
         <Route path='/evaluation' component={Evaluation} />
-        <Route path='/question-screen' component={Question} />
+        <Route path='/question-screen' component={Questionscreen} />
         <Route path='/rejected' component={Rejected} />
         <Route path='/accepted' component={Accepted} />
         <Route path='*' component={NotFound} />
