@@ -45,13 +45,14 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
+	__webpack_require__(227);
 	__webpack_require__(226);
-	__webpack_require__(225);
 	__webpack_require__(222);
 	__webpack_require__(220);
-	__webpack_require__(221);
 	__webpack_require__(223);
 	__webpack_require__(224);
+	__webpack_require__(225);
+	__webpack_require__(221);
 	module.exports = __webpack_require__(219);
 
 
@@ -79,23 +80,31 @@
 
 	var _evaluation2 = _interopRequireDefault(_evaluation);
 
-	var _questionScreen = __webpack_require__(221);
+	var _takequiz = __webpack_require__(221);
+
+	var _takequiz2 = _interopRequireDefault(_takequiz);
+
+	var _questionScreen = __webpack_require__(223);
 
 	var _questionScreen2 = _interopRequireDefault(_questionScreen);
+
+	var _questions = __webpack_require__(224);
+
+	var _questions2 = _interopRequireDefault(_questions);
 
 	var _countdownClock = __webpack_require__(222);
 
 	var _countdownClock2 = _interopRequireDefault(_countdownClock);
 
-	var _rejected = __webpack_require__(224);
+	var _rejected = __webpack_require__(225);
 
 	var _rejected2 = _interopRequireDefault(_rejected);
 
-	var _accepted = __webpack_require__(225);
+	var _accepted = __webpack_require__(226);
 
 	var _accepted2 = _interopRequireDefault(_accepted);
 
-	var _ = __webpack_require__(226);
+	var _ = __webpack_require__(227);
 
 	var _2 = _interopRequireDefault(_);
 
@@ -112,6 +121,7 @@
 	      _react2.default.createElement(_reactRouter.Redirect, { from: '/', to: '/welcome-screen' }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/welcome-screen', component: _welcomeScreen2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/evaluation', component: _evaluation2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/takequiz', component: _takequiz2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/question-screen', component: _questionScreen2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/rejected', component: _rejected2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/accepted', component: _accepted2.default }),
@@ -125,7 +135,7 @@
 	_reactDom2.default.render(_react2.default.createElement(Mars, null), document.querySelector('#mount-node'));
 
 	//browser not making a request to get a page,
-	//js is modifying the browser so that the user gets visual feedback but not actually got o another page
+	//js is modifying the browser so that the user gets visual feedback but not actually go to new page
 
 /***/ },
 /* 2 */
@@ -24894,12 +24904,9 @@
 
 	var Welcome = _react2.default.createClass({
 	  displayName: 'Welcome',
-
-
 	  _handletakeTest: function _handletakeTest() {
 	    _reactRouter.browserHistory.push('/evaluation');
 	  },
-
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -24931,12 +24938,9 @@
 
 	var Evaluation = _react2.default.createClass({
 	  displayName: 'Evaluation',
-
-
 	  _handlestartQuiz: function _handlestartQuiz() {
-	    _reactRouter.browserHistory.push('/question-screen');
+	    _reactRouter.browserHistory.push('/takequiz');
 	  },
-
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -24948,7 +24952,6 @@
 	      )
 	    );
 	  }
-
 	});
 
 	module.exports = Evaluation;
@@ -24969,163 +24972,78 @@
 
 	var _countdownClock2 = _interopRequireDefault(_countdownClock);
 
-	var _questions = __webpack_require__(223);
+	var _questionScreen = __webpack_require__(223);
 
-	var _questions2 = _interopRequireDefault(_questions);
+	var _questionScreen2 = _interopRequireDefault(_questionScreen);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// 'use strict';
+	var questions = [{
+	  question: 'Mars is the fourth planet from the Sun.',
+	  answer: true
+	}, {
+	  question: 'The film the Martian was set on Mars.',
+	  answer: true
+	}, {
+	  question: 'The NASA Exploration Rover Mission takes place on Mars.',
+	  answer: true
+	}];
 
-	var Questionscreen = _react2.default.createClass({
-	  displayName: 'Questionscreen',
+	var Quiz = _react2.default.createClass({
+	  displayName: 'Quiz',
 	  getInitialState: function getInitialState() {
 	    return {
-	      questions: {}
-
+	      questions: []
 	    };
 	  },
-
-
-	  quizAnswer: function quizAnswer(event) {
-	    event.preventDefault();
-
-	    this.ref.quizAnswer.reset();
+	  _handleCorrect: function _handleCorrect() {
+	    _reactRouter.browserHistory.push('/accepted');
 	  },
-
+	  _handleFailure: function _handleFailure() {
+	    _reactRouter.browserHistory.push('/rejected');
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'main-panel' },
-	      _react2.default.createElement('div', { className: 'timer' }),
-	      _react2.default.createElement(_countdownClock2.default, { startMinutes: 1
-	      }),
+	      _react2.default.createElement(_countdownClock2.default, { startMinutes: 1,
+	        onTimerFinished: this._handleFailure }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'quiz' },
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          'What is the fourth planet from the Sun?'
-	        ),
-	        _react2.default.createElement(
-	          'form',
-	          { className: 'quizForm' },
-	          _react2.default.createElement('input', { type: 'text', ref: 'quizAnswer' }),
-	          _react2.default.createElement(
-	            'button',
-	            { type: 'submit', onSubmit: this.renderQuestions },
-	            'Submit Answer'
-	          )
-	        )
+	        _react2.default.createElement(_questionScreen2.default, { onCorrect: this._handleCorrect,
+	          onFailure: this._handleFailure,
+	          questions: questions })
 	      )
 	    );
 	  }
 	});
 
-	module.exports = Questionscreen;
-
-	//--------------------------------------------------------Johnny's code
-	//
-	// var Questions = React.createClass({
-	//
-	// getInitialState: function(){
-	//   return {
-	//     correctCount: 0,
-	//     questionIndex: 0
-	//   }
-	// },
-	//
-	// componentWillUpdate: function(nextProps, nextState) {
-	//   if (nextState.questionIndex === nextProps.questions.length + 1) {
-	//     correctCount === 2
-	//     ? this.props. onCorrect())
-	//     : this.props. onFailure());
-	//   }
-	// },
-
-	//on Question screen:
-	//onCorrect={this._handleCorrect}
-	//_handleCorrect(){
-	// browserHistory.push('/accepted');
-	// }
-	//onFailer={this._handleFailure}
-	// browserHistory.push('/rejected');
-	// }
-
-	//
-	// render(){
-	//   return(
-	//     <div className='main-panel'>
-	//       <Question currentQuestion={this.props.questions[this.state.questionIndex]}
-	//         onAnswer={this._handleUserAnswer} />
-	//     </div>
-	//
-	//   )
-	// },
-	//
-	// _handleUserAnswer(userAnswer){
-	//   var correctAnswer = this.props.question[this.state.questionIndex].answer;
-	//
-	//   var currentCorrectCount = this.state.correctCount;
-	//
-	//   if (correctAnswer === userAnswer) {
-	//     currentCorrectCount = this.state.correctCount + 1;
-	// }
-	//   this.setState({
-	//     correctCount: currentCorrectCount,
-	//     questionIndex: this.state.questionIndex + 1
-	//   });
-	//
-	// });
-
-	// Question.propType = {
-	//   question: ReactPropTypes.arrayOf(
-	//     React.PropTypes.shapeOf({
-	//       question: React.PropTypes.string.isRequired,
-	//       answer:React.PropTypes.string.isRequired
-	//     }).isRequired
-	//   ).isRequired
-	// }
-
-	// {this.state.questions.map(this.renderQuestions)}
-	/*<Countdown
-	onTimerFinished ={this._handleTimeRunout}
-	startTime={60}
-	startTimer={this.state.startTimer} />*/
-
-	//Countdown.defaultProps = {
-	//   InitialStartTime: 60
-	// };
-
-	// _handleTimeRunout(){
-	//   browserHistory.push('./rejected');
-	// }
-
-	//PUBLIC FUNCTIONS AT THE TOP AND PRIVATE AT THE BOTTOM
+	module.exports = Quiz;
 
 /***/ },
 /* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(160);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// 'use strict';
+
 	var Countdown = _react2.default.createClass({
-	  displayName: "Countdown",
+	  displayName: 'Countdown',
 	  getInitialState: function getInitialState() {
 	    return {
-
 	      secondsElapsed: 60
 	    };
 	  },
-
-
 	  getSeconds: function getSeconds() {
 	    if (this.props.startMinutes >= 1) {
 	      return this.props.startMinutes * 60;
@@ -25133,164 +25051,190 @@
 	      return 60;
 	    }
 	  },
-
 	  secondsLeft: function secondsLeft() {
 	    return Math.floor(this.state.secondsElapsed % 60);
 	  },
-
 	  minutesLeft: function minutesLeft() {
 	    return Math.floor(this.state.secondsElapsed / 60);
 	  },
-
-	  //_decrementCounter(){
-	  //this.setState({secondsElapsed: this.state.secondsElapsed - 1});
-	  //}
-
-	  //componentWillReceiveProps(nextProps){
-	  //if (nextProps.startTime){
-	  //     this._startTimer();
-	  //   }
-	  // }
-
-	  // componentDidUpdate(prevProps, prevState){
-	  //   if (this.state.secondsElapsed === 0) this.props.onTimeFinished();
-	  // }
-
-	  //componentWillUnmount(){
-	  // clearInterval(this.interval);
-	  //},
-
-	  //this prevents memory leaks
-
-	  // _startTimer(){
-	  //     this.interval = setInterval(this._decrementCounter, 1000);
-	  // }
-
 	  tick: function tick() {
 	    this.setState({ secondsElapsed: this.state.secondsElapsed - 1 });
 	    if (this.state.secondsElapsed <= 0) {
 	      clearInterval(this.interval);
 	    }
 	  },
-
 	  componentDidMount: function componentDidMount() {
 	    this.interval = setInterval(this.tick, 1000);
 	  },
-
 	  render: function render() {
 	    return _react2.default.createElement(
-	      "div",
-	      { className: "timer" },
+	      'div',
+	      { className: 'timer' },
 	      _react2.default.createElement(
-	        "p",
+	        'p',
 	        null,
 	        this.minutesLeft(),
-	        " : ",
+	        ' : ',
 	        this.secondsLeft() < 10 ? "0" + this.secondsLeft() : this.secondsLeft()
 	      )
 	    );
 	  }
+	});
 
-	}); // 'use strict';
+	Countdown.propTypes = {
+	  onTimerFinished: _react2.default.PropTypes.func.isRequired
+	};
 
 	module.exports = Countdown;
 
-	// Countdown.propTypes = {
-	//   startTime: PropTypes.number.isRequired,
-	//   startTimer: PropTypes.func.isRequired,
-	//   onTimeFinished: PropTypes.func.isRequired
-	// }
-
 /***/ },
 /* 223 */
-/***/ function(module, exports) {
-
-	// import React from 'react';
-	//
-	//
-	//  var Questions = React.createClass ({
-	//   getInitialState: function(){
-	//     return= {};
-	//   },
-	//   render: function(){
-	//
-	//   question[1] =
-	//     question: 'Question?',
-	//     answer: "Mars",
-	//   },
-	//   {
-	//   question[2] =
-	//     question: 'Question?',
-	//     answer: "Mars",
-	//   },
-	//   {
-	//   question[3] =
-	//     question: 'Question?',
-	//     answer: "Mars",
-	//   };
-	//
-	// },
-	//
-	// render(){
-	//   return(
-	//     <div>
-	//       <h1>{this.props.question.question}</h1>
-	//       <button onClick={() => this.props.onAnswer(true)}>True</button>
-	//       <button onClick={() => this.props.onAnswer(false)}>False</button>
-	//     </div>
-	//   )
-	// }
-	//
-	// Questions.propTypes = {
-	//   currentQuestion: React.PropTypes.shape({
-	//     question: React.PropTypes.string.isRequired,
-	//     answer: React.PropTypes.bool.isRequired
-	//   }).isRequired
-	//   onAnswer: React.PropTypes.func.isRequired
-	// }
-
-	//() => function() the arrow calss a function in a function= an anonymous
-
-	//shapeOf- declaring what it will look like
-	//
-	//   renderQuestions: function(question, index){
-	//     return <Questions key={index}
-	//                       id={index} />;
-	//
-	//     }
-	//   },
-	//
-	// });
-
-	//
-	// module.exports = Questions;
-	"use strict";
-
-/***/ },
-/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(160);
+
+	var _questions = __webpack_require__(224);
+
+	var _questions2 = _interopRequireDefault(_questions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Questionscreen = _react2.default.createClass({
+	  displayName: 'Questionscreen',
+	  getInitialState: function getInitialState() {
+	    return {
+	      currectCount: 0,
+	      questionIndex: 0
+	    };
+	  },
+	  componentWillUpdate: function componentWillUpdate(nextProps, nextState) {
+	    if (nextState.questionIndex === nextProps.questions.length) {
+	      this.state.correctCount === 2 ? this.props.onCorrect() : this.props.onFailure();
+	    }
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'main-panel' },
+	      _react2.default.createElement(_questions2.default, { currentQuestion: this.props.questions[this.state.questionIndex],
+	        onAnswer: this._handleUserAnswer })
+	    );
+	  },
+	  _handleUserAnswer: function _handleUserAnswer(userAnswer) {
+	    var correctAnswer = this.props.questions[this.state.questionIndex].answer;
+	    var currentCorrectCount = this.state.correctCount;
+
+	    if (correctAnswer === userAnswer) {
+	      currentCorrectCount = currentCorrectCount + 1;
+	    }
+
+	    this.setState({
+	      correctCount: currentCorrectCount,
+	      questionIndex: this.state.questionIndex + 1
+
+	    });
+	  }
+	});
+
+	Questionscreen.propTypes = {
+	  questions: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+	    question: _react2.default.PropTypes.string.isRequired,
+	    answer: _react2.default.PropTypes.bool.isRequired
+	  }).isRequired).isRequired
+	};
+
+	module.exports = Questionscreen;
+
+	//PUBLIC FUNCTIONS AT THE TOP AND PRIVATE AT THE BOTTOM
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(160);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Questions = _react2.default.createClass({
+	  displayName: 'Questions',
+	  _handleTrue: function _handleTrue(e) {
+	    this.props.onAnswer(true);
+	  },
+	  _handleFalse: function _handleFalse(e) {
+	    this.props.onAnswer(false);
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'quiz' },
+	      _react2.default.createElement(
+	        'span',
+	        null,
+	        this.props.currentQuestion.question
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        { onClick: this.handleTrue },
+	        'True'
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        { onClick: this.handleFalse },
+	        'False'
+	      )
+	    );
+	  }
+	});
+
+	Questions.propTypes = {
+	  currentQuestion: _react2.default.PropTypes.shape({
+	    question: _react2.default.PropTypes.string.isRequired,
+	    answer: _react2.default.PropTypes.bool.isRequired
+	  }).isRequired,
+	  onAnswer: _react2.default.PropTypes.func.isRequired
+	};
+
+	module.exports = Questions;
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(160);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Rejected = _react2.default.createClass({
-	  displayName: "Rejected",
+	  displayName: 'Rejected',
 
 
 	  render: function render() {
 
 	    return _react2.default.createElement(
-	      "div",
-	      { className: "rejected-panel" },
+	      'div',
+	      { className: 'rejected-panel' },
 	      _react2.default.createElement(
-	        "h1",
-	        { className: "rejected" },
-	        "Rejected!"
+	        'h1',
+	        { className: 'rejected' },
+	        'Rejected!'
 	      )
 	    );
 	  }
@@ -25300,7 +25244,7 @@
 	module.exports = Rejected;
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25322,7 +25266,16 @@
 	    return _react2.default.createElement(
 	      "div",
 	      { className: "accepted-panel" },
-	      _react2.default.createElement("h1", { className: "accepted", tagline: "Accepted!" })
+	      _react2.default.createElement(
+	        "h1",
+	        { className: "accepted" },
+	        "Accepted!"
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "shuttle-launch" },
+	        _react2.default.createElement("i", { className: "fa fa-space-shuttle" })
+	      )
 	    );
 	  }
 
@@ -25331,7 +25284,7 @@
 	module.exports = Accepted;
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

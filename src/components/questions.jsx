@@ -1,59 +1,33 @@
-// import React from 'react';
-//
-//
-//  var Questions = React.createClass ({
-//   getInitialState: function(){
-//     return= {};
-//   },
-//   render: function(){
-//
-//   question[1] =
-//     question: 'Question?',
-//     answer: "Mars",
-//   },
-//   {
-//   question[2] =
-//     question: 'Question?',
-//     answer: "Mars",
-//   },
-//   {
-//   question[3] =
-//     question: 'Question?',
-//     answer: "Mars",
-//   };
-//
-// },
-//
-// render(){
-//   return(
-//     <div>
-//       <h1>{this.props.question.question}</h1>
-//       <button onClick={() => this.props.onAnswer(true)}>True</button>
-//       <button onClick={() => this.props.onAnswer(false)}>False</button>
-//     </div>
-//   )
-// }
-//
-// Questions.propTypes = {
-//   currentQuestion: React.PropTypes.shape({
-//     question: React.PropTypes.string.isRequired,
-//     answer: React.PropTypes.bool.isRequired
-//   }).isRequired
-//   onAnswer: React.PropTypes.func.isRequired
-// }
+import React from 'react';
+import {browserHistory} from 'react-router';
 
-//() => function() the arrow calss a function in a function= an anonymous
+var Questions = React.createClass({
 
-//shapeOf- declaring what it will look like
-//
-//   renderQuestions: function(question, index){
-//     return <Questions key={index}
-//                       id={index} />;
-//
-//     }
-//   },
-//
-// });
+  _handleTrue(e) {
+    this.props.onAnswer(true);
+  },
 
-//
-// module.exports = Questions;
+  _handleFalse(e){
+    this.props.onAnswer(false);
+  },
+
+  render(){
+    return (
+      <div className="quiz">
+          <span>{this.props.currentQuestion.question}</span>
+          <button onClick={this.handleTrue}>True</button>
+          <button onClick={this.handleFalse}>False</button>
+      </div>
+    );
+  }
+});
+
+Questions.propTypes = {
+  currentQuestion: React.PropTypes.shape({
+    question: React.PropTypes.string.isRequired,
+    answer: React.PropTypes.bool.isRequired
+  }).isRequired,
+  onAnswer: React.PropTypes.func.isRequired
+};
+
+module.exports = Questions;
