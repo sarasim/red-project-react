@@ -3,11 +3,11 @@ import {browserHistory} from 'react-router';
 
 var Questions = React.createClass({
 
-  _handleTrue(e) {
+  _handleTrue() {
     this.props.onAnswer(true);
   },
 
-  _handleFalse(e){
+  _handleFalse() {
     this.props.onAnswer(false);
   },
 
@@ -15,11 +15,12 @@ var Questions = React.createClass({
     return (
       <div className="quiz">
           <span>{this.props.currentQuestion.question}</span>
-          <button onClick={this.handleTrue}>True</button>
-          <button onClick={this.handleFalse}>False</button>
+          <button onClick={this._handleTrue}>True</button>
+          <button onClick={this._handleFalse}>False</button>
       </div>
     );
   }
+
 });
 
 Questions.propTypes = {

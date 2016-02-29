@@ -38,12 +38,14 @@ var Quiz = React.createClass({
   render(){
     return (
       <div className="main-panel">
-          <Countdown startMinutes={1}
-                     onTimerFinished={this._handleFailure} />
+          <Countdown
+            startMinutes={1}
+            onTimerFinished={this._handleFailure} />
           <div className="quiz">
-              <Questionscreen onCorrect={this._handleCorrect}
-                              onFailure={this._handleFailure}
-                              questions={questions} />
+            <Questionscreen
+              onCorrect={this._handleCorrect}
+              onFailure={this._handleFailure}
+              questions={questions} />
           </div>
      </div>
     )

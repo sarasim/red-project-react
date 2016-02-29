@@ -7,6 +7,11 @@
 
 .main-panel {
   align-items: center;
+  background:
+    linear-gradient(to bottom, rgba(255, 0, 10, 0.40) 0%, rgba(10, 0, 10, 0.20) 110%),
+    url('images/mars-art.jpg')no-repeat center center,
+    -webkit-linear-gradient(bottom, rgba(255, 0, 10, 0.40) 0%, rgba(10, 0, 10, 0.30) 100%);
+  background-size: cover;
   display: flex;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -14,10 +19,6 @@
   flex: 1 0 80%;
   height: 100vh;
   justify-content: center;
-  background:
-    // linear-gradient(to bottom, rgba(255, 0, 10, 0.40) 0%, rgba(10, 0, 10, 0.20) 110%),
-    url('images/mars-art.jpg')no-repeat center;
-    // -webkit-linear-gradient(bottom, rgba(255, 0, 10, 0.40) 0%, rgba(10, 0, 10, 0.30) 100%);
   width: 100vw;
 }
 

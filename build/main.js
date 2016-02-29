@@ -25006,12 +25006,14 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'main-panel' },
-	      _react2.default.createElement(_countdownClock2.default, { startMinutes: 1,
+	      _react2.default.createElement(_countdownClock2.default, {
+	        startMinutes: 1,
 	        onTimerFinished: this._handleFailure }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'quiz' },
-	        _react2.default.createElement(_questionScreen2.default, { onCorrect: this._handleCorrect,
+	        _react2.default.createElement(_questionScreen2.default, {
+	          onCorrect: this._handleCorrect,
 	          onFailure: this._handleFailure,
 	          questions: questions })
 	      )
@@ -25109,7 +25111,7 @@
 	  displayName: 'Questionscreen',
 	  getInitialState: function getInitialState() {
 	    return {
-	      currectCount: 0,
+	      correctCount: 0,
 	      questionIndex: 0
 	    };
 	  },
@@ -25122,7 +25124,8 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'main-panel' },
-	      _react2.default.createElement(_questions2.default, { currentQuestion: this.props.questions[this.state.questionIndex],
+	      _react2.default.createElement(_questions2.default, {
+	        currentQuestion: this.props.questions[this.state.questionIndex],
 	        onAnswer: this._handleUserAnswer })
 	    );
 	  },
@@ -25169,10 +25172,10 @@
 
 	var Questions = _react2.default.createClass({
 	  displayName: 'Questions',
-	  _handleTrue: function _handleTrue(e) {
+	  _handleTrue: function _handleTrue() {
 	    this.props.onAnswer(true);
 	  },
-	  _handleFalse: function _handleFalse(e) {
+	  _handleFalse: function _handleFalse() {
 	    this.props.onAnswer(false);
 	  },
 	  render: function render() {
@@ -25186,12 +25189,12 @@
 	      ),
 	      _react2.default.createElement(
 	        'button',
-	        { onClick: this.handleTrue },
+	        { onClick: this._handleTrue },
 	        'True'
 	      ),
 	      _react2.default.createElement(
 	        'button',
-	        { onClick: this.handleFalse },
+	        { onClick: this._handleFalse },
 	        'False'
 	      )
 	    );

@@ -8,7 +8,7 @@ var Questionscreen = React.createClass({
 
   getInitialState(){
     return {
-        currectCount: 0,
+        correctCount: 0,
         questionIndex: 0
     };
 
@@ -25,8 +25,9 @@ var Questionscreen = React.createClass({
   render(){
     return (
         <div className="main-panel">
-            <Questions currentQuestion={this.props.questions[this.state.questionIndex]}
-                       onAnswer={this._handleUserAnswer} />
+          <Questions
+            currentQuestion={this.props.questions[this.state.questionIndex]}
+            onAnswer={this._handleUserAnswer} />
       </div>
     )
   },
