@@ -3,9 +3,12 @@ import {browserHistory} from 'react-router';
 
 var Welcome = React.createClass({
 
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
 
   _handletakeTest(){
-   browserHistory.push('/evaluation');
+   this.context.router.push('/evaluation');
 
   },
 

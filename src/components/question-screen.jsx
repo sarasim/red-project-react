@@ -5,22 +5,24 @@ import Questions from './questions.jsx';
 
 var Questionscreen = React.createClass({
 
-  getInitialState(){
+getInitialState(){
     return {
         correctCount: 0,
         questionIndex: 0
     };
   },
 
-   componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate(nextProps, nextState) {
      if (nextState.questionIndex === nextProps.questions.length) {
        this.state.correctCount === 2
-       ? this.props. onCorrect()
-       : this.props. onFailure();
+       ? this.props.onCorrect()
+       : this.props.onFailure();
     }
 },
 
   render(){
+    const currentQuestion = this.props.questions[this.state.questionIndex];
+    if (!currentQuestion) return <div/>;
     return (
         <div className="main-panel">
           <Questions
@@ -48,8 +50,8 @@ _handleUserAnswer(userAnswer) {
 });
 
 Questionscreen.propTypes = {
-    questions: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
+  questions: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
           question: React.PropTypes.string.isRequired,
           answer: React.PropTypes.bool.isRequired
     }).isRequired

@@ -5,6 +5,10 @@ import {browserHistory} from 'react-router';
 
 var Countdown = React.createClass({
 
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+
   getInitialState() {
     return {
           secondsElapsed: this.getSeconds(),
@@ -44,7 +48,7 @@ var Countdown = React.createClass({
 
    timerFinished(){
      if (this.state.secondsElapsed === 0){
-       browserHistory.push('/rejected');
+       this.context.router.push('/rejected');
      }
    },
 

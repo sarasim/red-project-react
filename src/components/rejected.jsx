@@ -8,10 +8,8 @@ render : function(){
   <div className="rejected-panel">
     <h1 className="rejected">Rejected!</h1>
   </div>
-
-  )
-}
-
+    )
+  }
 });
 
 module.exports = Rejected;

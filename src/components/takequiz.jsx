@@ -21,6 +21,10 @@ var questions = [
 
 var Quiz = React.createClass({
 
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+
   getInitialState(){
     return {
       questions: []
@@ -28,11 +32,11 @@ var Quiz = React.createClass({
   },
 
   _handleCorrect(){
-    browserHistory.push('/accepted');
+    this.context.router.push('/accepted');
   },
 
   _handleFailure(){
-    browserHistory.push('/rejected');
+    this.context.router.push('/rejected');
   },
 
   render(){

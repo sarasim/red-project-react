@@ -3,8 +3,12 @@ import {browserHistory} from "react-router";
 
 var Evaluation = React.createClass({
 
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+
   _handlestartQuiz(){
-     browserHistory.push('/takequiz');
+     this.context.router.push('/takequiz');
   },
 
   render(){
