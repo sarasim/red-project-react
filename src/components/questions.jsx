@@ -1,5 +1,4 @@
 import React from 'react';
-import {browserHistory} from 'react-router';
 
 var Questions = React.createClass({
 
@@ -13,10 +12,12 @@ var Questions = React.createClass({
 
   render(){
     return (
-      <div className="quiz">
-          <span>{this.props.currentQuestion.question}</span>
-          <button onClick={this._handleTrue}>True</button>
-          <button onClick={this._handleFalse}>False</button>
+      <div className="quiz-wrapper">
+        <div className="quiz">
+            <span>{this.props.currentQuestion.question}</span>
+            <button onClick={this._handleTrue}>True</button>
+            <button onClick={this._handleFalse}>False</button>
+        </div>
       </div>
     );
   }

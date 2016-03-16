@@ -30,6 +30,8 @@ gulp.task('compile-react', function() {
             output: {
               filename: 'main.js'
             },
+            debug: true,
+            devtool: 'eval-source-map',
             module: {
               loaders: [{
                 test: /\.jsx?$/,

@@ -1,5 +1,4 @@
 import React from 'react';
-import {browserHistory} from "react-router";
 
 import Questions from './questions.jsx';
 
@@ -11,7 +10,6 @@ var Questionscreen = React.createClass({
         correctCount: 0,
         questionIndex: 0
     };
-
   },
 
    componentWillUpdate(nextProps, nextState) {

@@ -7,7 +7,7 @@ var Countdown = React.createClass({
 
   getInitialState() {
     return {
-          secondsElapsed: 60
+          secondsElapsed: this.getSeconds(),
       };
   },
 
@@ -29,8 +29,8 @@ var Countdown = React.createClass({
 
   tick(){
       this.setState({secondsElapsed: this.state.secondsElapsed - 1});
-      if (this.state.secondsElapsed <=0){
-      clearInterval(this.interval);
+      if (this.state.secondsElapsed === 0){
+      this.componentWillUnmount();
       }
     },
 
@@ -38,10 +38,21 @@ var Countdown = React.createClass({
       this.interval = setInterval(this.tick, 1000);
    },
 
+   componentWillUnmount(){
+     clearInterval(this.interval);
+   },
+
+   timerFinished(){
+     if (this.state.secondsElapsed === 0){
+       browserHistory.push('/rejected');
+     }
+   },
+
   render(){
     return (
         <div className="timer">
           <p>{this.minutesLeft()} : {this.secondsLeft() < 10 ? "0" + this.secondsLeft() : this.secondsLeft()}</p>
+          {this.timerFinished()}
         </div>
 
     );
