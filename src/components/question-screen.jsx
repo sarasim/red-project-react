@@ -59,8 +59,3 @@ Questionscreen.propTypes = {
 };
 
 module.exports = Questionscreen;
-
-
-
-
-//PUBLIC FUNCTIONS AT THE TOP AND PRIVATE AT THE BOTTOM

@@ -10,14 +10,6 @@ var Questions = React.createClass({
     this.props.onAnswer(false);
   },
 
-//   var CurrentQuestion = React.createClass({
-//     propTypes: {
-//     question: React.PropTypes.string.isRequired,
-//     answer: React.PropTypes.bool.isRequired
-//   }).isRequired,
-// },
-
-
   render(){
     return (
       <div className="quiz-wrapper">

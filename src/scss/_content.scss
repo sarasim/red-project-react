@@ -8,9 +8,7 @@
 .main-panel {
   align-items: center;
   background:
-    // linear-gradient(to bottom, rgba(255, 0, 10, 0.40) 0%, rgba(10, 0, 10, 0.20) 110%),
-    url('images/mars-astros.png')no-repeat center center,
-    -webkit-linear-gradient(bottom, rgba(255, 0, 10, 0.40) 0%, rgba(10, 0, 10, 0.30) 100%);
+    url('images/mars-astros.png')no-repeat center center;
   background-size: cover;
   display: flex;
   display: -webkit-flex;
